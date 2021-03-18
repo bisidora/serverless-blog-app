@@ -1,4 +1,5 @@
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro";
 import CardLIstItem from "components/CardListItem";
