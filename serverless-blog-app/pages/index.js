@@ -23,6 +23,11 @@ const Home = ({ blogs }) => {
               subtitle={blog.subtitle}
               date={blog.date}
               image={blog.coverImage}
+              slug={blog.slug}
+              link={{
+                href: "/blogs/[slug]",
+                as: `/blogs/${blog.slug}`,
+              }}
             />
           </Col>
         ))}
