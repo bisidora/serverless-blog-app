@@ -1,10 +1,27 @@
 import PageLayout from "components/PageLayout";
-import { getBlogBySlug } from "lib/api";
+import { getBlogBySlug, getAllBlogs } from "lib/api";
+import { Row, Col } from "react-bootstrap";
+import BlogHeader from "components/BlogHeader";
+import BlogContent from "components/BlogContent";
+
+import { urlFor } from "lib/api";
 
 const BlogDetail = ({ blog }) => {
   return (
-    <PageLayout>
-      <h1> Hello detail page - {blog?.slug}</h1>
+    <PageLayout className="blog-detail-page">
+      <Row>
+        <Col md={{ span: 10, offset: 1 }}>
+          <BlogHeader
+            title={blog.title}
+            subtitle={blog.subtitle}
+            author={blog.author}
+            date={blog.date}
+            coverImage={urlFor(blog.coverImage).height(400).url()}
+          />
+          <hr />
+          <BlogContent content={blog.content} />
+        </Col>
+      </Row>
     </PageLayout>
   );
 };
@@ -16,19 +33,11 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const blogs = await getAllBlogs();
+
   return {
-    paths: [
-      {
-        params: { slug: "my-first-blog" },
-      },
-      {
-        params: { slug: "my-second-blog" },
-      },
-      {
-        params: { slug: "my-third-blog" },
-      },
-    ],
+    paths: blogs?.map((blog) => ({ params: { slug: blog.slug } })),
     fallback: false,
   };
 }
