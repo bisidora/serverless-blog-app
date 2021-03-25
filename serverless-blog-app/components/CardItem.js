@@ -8,7 +8,7 @@ const CardItem = ({ title, subtitle, date, image, author, slug, link }) => {
       <div className="card-body-wrapper">
         <Card.Header className="d-flex flex-row">
           <img
-            src={author.avatar}
+            src={author?.avatar}
             className="rounded-circle mr-3"
             height="50px"
             width="50px"
@@ -16,7 +16,7 @@ const CardItem = ({ title, subtitle, date, image, author, slug, link }) => {
           />
           <div>
             <Card.Title className="font-weight-bold mb-1">
-              {author.name}
+              {author?.name}
             </Card.Title>
             <Card.Text className="card-date">{date}</Card.Text>
           </div>
